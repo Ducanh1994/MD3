@@ -1,0 +1,39 @@
+create database store;
+use store;
+create table product (
+idProduct int not null auto_increment primary key,
+nameProduct varchar(255) not null,
+price int not null default 0,
+discription varchar(255) null,
+quantity int not null default 0,
+idCatagory int not null,
+foreign key (idCatagory) references catagory(idCatagory)
+);
+
+create table catagory (
+idCatagory int not null auto_increment primary key,
+nameCatagory varchar(255) not null
+);
+
+create table customer (
+idCustomer int not null auto_increment primary key,
+nameCustomer varchar(255) not null,
+age int not null,
+phoneNumber varchar(10) not null,
+address varchar(100) null
+);
+
+create table bill (
+idBill int not null auto_increment primary key,
+timeBuy datetime null,
+totalMoney int not null,
+idCustomer int not null,
+foreign key(idCustomer) references customer(idCustomer)
+);
+
+create table productBill (
+idProduct int not null,
+foreign key(idProduct) references product(idProduct),
+idBill int not null,
+foreign key(idBill) references bill(idBill)
+);
